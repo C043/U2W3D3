@@ -7,7 +7,7 @@ class Book {
 
 const cartBooks = [];
 
-const deleteBook = (event) => {
+const deleteCartBook = (event) => {
   const book = event.currentTarget.parentElement;
   book.style.display = "none";
   const cart = document.getElementById("cart");
@@ -37,7 +37,7 @@ const cartGen = () => {
     const delBtn = document.createElement("a");
     delBtn.classList.add("btn", "btn-danger", "ms-1");
     delBtn.innerText = "c";
-    delBtn.onclick = deleteBook;
+    delBtn.onclick = deleteCartBook;
     li.appendChild(delBtn);
     cartList.appendChild(li);
     const hr = document.createElement("hr");
@@ -76,7 +76,7 @@ const buyElement = (event) => {
 
 const deleteElement = (event) => {
   const currentCard = event.currentTarget.parentElement.parentElement;
-  currentCard.style.display = "none";
+  currentCard.remove();
 };
 
 const cardGen = (book, container) => {
