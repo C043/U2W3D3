@@ -10,8 +10,17 @@ const cartBooks = [];
 const deleteCartBook = (event) => {
   const book = event.currentTarget.parentElement;
   book.remove();
+  const bookTitle = event.currentTarget.parentElement.childNodes[0].innerText;
+  for (let i = 0; i < cartBooks.length; i++) {
+    const currentBook = cartBooks[i];
+    if (currentBook.title === bookTitle) {
+      cartBooks.splice(i, 1);
+      console.log(currentBook);
+      break;
+    }
+  }
+
   const cart = document.getElementById("cart");
-  cartBooks.pop();
   cart.innerText = `Carrello ${cartBooks.length}`;
   localStorage.setItem("Cart Books", JSON.stringify(cartBooks));
 };
@@ -41,12 +50,15 @@ const cartGen = () => {
     li.style.webkitLineClamp = "2";
     li.style.overflow = "hidden";
 
-    li.innerText = currentBook.title + " " + currentBook.price;
+    const title = document.createElement("p");
+    const price = document.createElement("p");
+    title.innerText = currentBook.title;
+    price.innerText = currentBook.price;
     const delBtn = document.createElement("a");
     delBtn.classList.add("btn", "btn-danger", "ms-1");
     delBtn.innerText = "c";
     delBtn.onclick = deleteCartBook;
-    li.appendChild(delBtn);
+    li.append(title, price, delBtn);
     cartList.appendChild(li);
   }
   console.log(booksRetrieved);
@@ -68,8 +80,12 @@ const buyElement = (event) => {
     "pb-2",
     "mt-2"
   );
-  li.innerText = book.title + " " + book.price;
-  const delBtn = document.createElement("a");
+  const titleLi = document.createElement("p");
+  titleLi.classList.add("me-auto");
+  const priceLi = document.createElement("p");
+  titleLi.innerText = book.title;
+  priceLi.innerText = book.price;
+  const delBtn = document.createElement("button");
   delBtn.classList.add("btn", "btn-danger", "ms-1");
   li.style.display = "-webkit-box";
   li.style.webkitBoxOrient = "vertical";
@@ -78,7 +94,7 @@ const buyElement = (event) => {
 
   delBtn.innerText = "c";
   delBtn.onclick = deleteCartBook;
-  li.appendChild(delBtn);
+  li.append(titleLi, priceLi, delBtn);
 
   cartList.appendChild(li);
 
@@ -90,7 +106,7 @@ const buyElement = (event) => {
 };
 
 const deleteElement = (event) => {
-  const currentCard = event.currentTarget.parentElement.parentElement.parentElement;
+  const currentCard = event.currentTarget.closest(".col-md-4");
   currentCard.remove();
 };
 
@@ -101,6 +117,7 @@ const cardGen = (book, container) => {
 
   const card = document.createElement("div");
   card.classList.add("card");
+  card.style.height = "80vh";
 
   const img = document.createElement("img");
   img.src = book.img;
@@ -119,7 +136,7 @@ const cardGen = (book, container) => {
   h5.innerText = book.title;
   h5.style.display = "-webkit-box";
   h5.style.webkitBoxOrient = "vertical";
-  h5.style.webkitLineClamp = "2";
+  h5.style.webkitLineClamp = "1";
   h5.style.overflow = "hidden";
 
   cardBody.appendChild(h5);
