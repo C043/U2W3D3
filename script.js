@@ -23,9 +23,10 @@ const cartGen = () => {
       "mx-3",
       "d-flex",
       "justify-content-between",
-      "align-items-center",
+      "align-items-start",
       "border-bottom",
-      "pb-2"
+      "mt-2",
+      "pb-1"
     );
     li.style.display = "-webkit-box";
     li.style.webkitBoxOrient = "vertical";
@@ -33,12 +34,13 @@ const cartGen = () => {
     li.style.overflow = "hidden";
 
     const title = document.createElement("p");
+    title.classList.add("me-5", "mb-1");
+
     const price = document.createElement("p");
     title.innerText = currentBook.title;
     price.innerText = currentBook.price;
-    const delBtn = document.createElement("a");
-    delBtn.classList.add("btn", "btn-danger", "ms-1");
-    delBtn.innerText = "c";
+    const delBtn = document.createElement("i");
+    delBtn.classList.add("fa-solid", "fa-trash", "btn", "btn-danger", "ms-1");
     delBtn.onclick = deleteCartBook;
     li.append(title, price, delBtn);
     cartList.appendChild(li);
@@ -57,24 +59,23 @@ const buyElement = (event) => {
     "mx-3",
     "d-flex",
     "justify-content-between",
-    "align-items-center",
+    "align-items-start",
     "border-bottom",
-    "pb-2",
-    "mt-2"
+    "mt-2",
+    "pb-1"
   );
   const titleLi = document.createElement("p");
-  titleLi.classList.add("me-auto");
+  titleLi.classList.add("me-5", "mb-1");
   const priceLi = document.createElement("p");
   titleLi.innerText = book.title;
   priceLi.innerText = book.price;
   const delBtn = document.createElement("button");
-  delBtn.classList.add("btn", "btn-danger", "ms-1");
   li.style.display = "-webkit-box";
   li.style.webkitBoxOrient = "vertical";
   li.style.webkitLineClamp = "2";
   li.style.overflow = "hidden";
 
-  delBtn.innerText = "c";
+  delBtn.classList.add("fa-solid", "fa-trash", "btn", "btn-danger", "ms-1");
   delBtn.onclick = deleteCartBook;
   li.append(titleLi, priceLi, delBtn);
 
@@ -148,7 +149,7 @@ const cardGen = (book, container) => {
   cardBody.appendChild(price);
 
   const delBtn = document.createElement("a");
-  delBtn.classList.add("btn", "btn-primary", "me-1");
+  delBtn.classList.add("btn", "btn-outline-danger", "me-1");
   delBtn.innerText = "Scarta";
 
   delBtn.onclick = deleteElement;
