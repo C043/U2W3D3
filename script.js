@@ -7,24 +7,6 @@ class Book {
 
 const cartBooks = [];
 
-const deleteCartBook = (event) => {
-  const book = event.currentTarget.parentElement;
-  book.remove();
-  const bookTitle = event.currentTarget.parentElement.childNodes[0].innerText;
-  for (let i = 0; i < cartBooks.length; i++) {
-    const currentBook = cartBooks[i];
-    if (currentBook.title === bookTitle) {
-      cartBooks.splice(i, 1);
-      console.log(currentBook);
-      break;
-    }
-  }
-
-  const cart = document.getElementById("cart");
-  cart.innerText = `Carrello ${cartBooks.length}`;
-  localStorage.setItem("Cart Books", JSON.stringify(cartBooks));
-};
-
 const cartGen = () => {
   const books = localStorage.getItem("Cart Books");
   const booksRetrieved = JSON.parse(books);
@@ -106,22 +88,40 @@ const buyElement = (event) => {
 };
 
 const deleteElement = (event) => {
-  const currentCard = event.currentTarget.closest(".col-md-4");
+  const currentCard = event.currentTarget.closest(".col-md-6");
   currentCard.remove();
+};
+
+const deleteCartBook = (event) => {
+  const book = event.currentTarget.parentElement;
+  book.remove();
+  const bookTitle = event.currentTarget.parentElement.childNodes[0].innerText;
+  for (let i = 0; i < cartBooks.length; i++) {
+    const currentBook = cartBooks[i];
+    if (currentBook.title === bookTitle) {
+      cartBooks.splice(i, 1);
+      console.log(currentBook);
+      break;
+    }
+  }
+
+  const cart = document.getElementById("cart");
+  cart.innerText = `Carrello ${cartBooks.length}`;
+  localStorage.setItem("Cart Books", JSON.stringify(cartBooks));
 };
 
 const cardGen = (book, container) => {
   /* Creazione card */
   const col = document.createElement("div");
-  col.classList.add("col-md-4", "col-lg-3");
+  col.classList.add("col-md-6", "col-lg-4", "col-xl-3");
 
   const card = document.createElement("div");
+  card.style.height = "90vh";
   card.classList.add("card");
-  card.style.height = "80vh";
 
   const img = document.createElement("img");
   img.src = book.img;
-  img.style.height = "500px";
+  img.style.height = "100%";
   img.style.objectFit = "cover";
   img.classList.add("card-img-top");
 
