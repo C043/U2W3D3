@@ -13,7 +13,7 @@ const cartGen = () => {
   const cartList = document.getElementById("cart-list");
   cartList.style.width = "300px";
   const cart = document.getElementById("cart");
-  cart.innerText = `Carrello ${booksRetrieved.length}`;
+  cart.innerText = ` ${booksRetrieved.length}`;
   for (let i = 0; i < booksRetrieved.length; i++) {
     const currentBook = booksRetrieved[i];
     cartBooks.push(currentBook);
@@ -70,11 +70,6 @@ const buyElement = (event) => {
   titleLi.innerText = book.title;
   priceLi.innerText = book.price;
   const delBtn = document.createElement("button");
-  li.style.display = "-webkit-box";
-  li.style.webkitBoxOrient = "vertical";
-  li.style.webkitLineClamp = "2";
-  li.style.overflow = "hidden";
-
   delBtn.classList.add("fa-solid", "fa-trash", "btn", "btn-danger", "ms-1");
   delBtn.onclick = deleteCartBook;
   li.append(titleLi, priceLi, delBtn);
@@ -83,7 +78,7 @@ const buyElement = (event) => {
 
   cartBooks.push(book);
   const cart = document.getElementById("cart");
-  cart.innerText = `Carrello ${cartBooks.length}`;
+  cart.innerText = ` ${cartBooks.length}`;
 
   localStorage.setItem("Cart Books", JSON.stringify(cartBooks));
 };
@@ -107,7 +102,7 @@ const deleteCartBook = (event) => {
   }
 
   const cart = document.getElementById("cart");
-  cart.innerText = `Carrello ${cartBooks.length}`;
+  cart.innerText = ` ${cartBooks.length}`;
   localStorage.setItem("Cart Books", JSON.stringify(cartBooks));
 };
 
