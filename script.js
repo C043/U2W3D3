@@ -140,9 +140,9 @@ const cardGen = (book, container) => {
 /* Funzione che prende i libri dall'API e genera le card */
 const bookGen = () => {
   fetch("https://striveschool-api.herokuapp.com/books")
-    .then(books => {
-      if (books.ok) {
-        return books.json();
+    .then(resp => {
+      if (resp.ok) {
+        return resp.json();
       } else {
         throw new Error("Errore nel reperimento dei dati");
       }
