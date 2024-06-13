@@ -45,7 +45,7 @@ const cartItemGen = (obj, container) => {
 };
 
 /* funzione che aggiunge un libro al carrello */
-const buyElement = (event) => {
+const buyElement = event => {
   const cartList = document.getElementById("cart-list");
   const title = event.currentTarget.parentElement.childNodes[0].innerText;
   const price = event.currentTarget.parentElement.childNodes[1].innerText;
@@ -68,13 +68,13 @@ const cartGen = () => {
 };
 
 /* funzione che scarta un libro */
-const deleteElement = (event) => {
+const deleteElement = event => {
   const currentCard = event.currentTarget.closest(".col-md-6");
   currentCard.remove();
 };
 
 /* funzione che toglie un libro dal carrello */
-const deleteCartBook = (event) => {
+const deleteCartBook = event => {
   const book = event.currentTarget.parentElement;
   book.remove();
   const bookTitle = event.currentTarget.parentElement.childNodes[0].innerText;
@@ -140,21 +140,21 @@ const cardGen = (book, container) => {
 /* Funzione che prende i libri dall'API e genera le card */
 const bookGen = () => {
   fetch("https://striveschool-api.herokuapp.com/books")
-    .then((books) => {
+    .then(books => {
       if (books.ok) {
         return books.json();
       } else {
         throw new Error("Errore nel reperimento dei dati");
       }
     })
-    .then((booksArray) => {
+    .then(booksArray => {
       const row = document.getElementById("card-space");
       for (let i = 0; i < booksArray.length; i++) {
         const currentBook = booksArray[i];
         cardGen(currentBook, row);
       }
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       bookGen();
     });
