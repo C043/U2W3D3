@@ -95,12 +95,11 @@ const cardGen = (book, container) => {
   col.classList.add("col-md-6", "col-lg-4", "col-xl-3");
 
   const card = document.createElement("div");
-  card.style.height = "90vh";
   card.classList.add("card");
 
   const img = document.createElement("img");
   img.src = book.img;
-  img.style.height = "100%";
+  img.style.height = "430px";
   img.style.objectFit = "cover";
   img.classList.add("card-img-top");
 
