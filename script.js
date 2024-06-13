@@ -22,16 +22,19 @@ const cartItemGen = (obj, container) => {
     "mt-2",
     "pb-1"
   );
+
   const titleLi = document.createElement("p");
   titleLi.classList.add("me-5", "mb-1");
-  const priceLi = document.createElement("p");
   titleLi.innerText = obj.title;
+
+  const priceLi = document.createElement("p");
   priceLi.innerText = obj.price;
+
   const delBtn = document.createElement("button");
   delBtn.classList.add("fa-solid", "fa-trash", "btn", "btn-danger", "ms-1");
   delBtn.onclick = deleteCartBook;
-  li.append(titleLi, priceLi, delBtn);
 
+  li.append(titleLi, priceLi, delBtn);
   container.appendChild(li);
 
   cartBooks.push(obj);
@@ -103,9 +106,6 @@ const cardGen = (book, container) => {
   img.style.objectFit = "cover";
   img.classList.add("card-img-top");
 
-  col.appendChild(card);
-  card.append(img);
-
   const cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
 
@@ -117,28 +117,23 @@ const cardGen = (book, container) => {
   h5.style.webkitLineClamp = "1";
   h5.style.overflow = "hidden";
 
-  cardBody.appendChild(h5);
-
   const price = document.createElement("p");
   price.classList.add("card-text");
   price.innerText = book.price + "$";
 
-  cardBody.appendChild(price);
-
   const delBtn = document.createElement("a");
   delBtn.classList.add("btn", "btn-outline-danger", "me-1");
   delBtn.innerText = "Scarta";
-
   delBtn.onclick = deleteElement;
 
   const buyBtn = document.createElement("a");
   buyBtn.classList.add("btn", "btn-primary");
   buyBtn.innerText = "Compra";
-
   buyBtn.onclick = buyElement;
 
-  cardBody.append(delBtn, buyBtn);
-  card.appendChild(cardBody);
+  cardBody.append(h5, price, delBtn, buyBtn);
+  card.append(img, cardBody);
+  col.appendChild(card);
   container.appendChild(col);
 };
 
